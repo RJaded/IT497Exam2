@@ -1,0 +1,19 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<reg, echo=FALSE>>=
+
+library(bitops)
+library(RCurl)
+
+examdata <- getURL("https://raw.githubusercontent.com/jrwolf/IT497/master/spendingdata.txt")
+examdata2 <- read.table(textConnection(examdata), sep = ",", header = TRUE, skip = 31, stringsAsFactors = FALSE)
+
+@
+\textbf{Cash is the most used retail payment instrument.}
+
+By value, cash accounts for a relatively small share of total consumer transaction activity at \Sexpr{examdata2[3,2]} percent, while electronic methods make up \Sexpr{examdata2[3,6]} percent and checks \Sexpr{examdata2[3,3]} percent. These findings suggest that although consumers don\textquotesingle t use electronic methods or checks very often, when they do, it tends to be for much higher-value transactions. In contrast, cash is used quite often, but primarily for low-value transactions. In fact, the average value of a cash transaction is only \\Sexpr{examdata2[2,2]}, compared with \\Sexpr{examdata2[2,3]} for checks and \\Sexpr{examdata2[2,5]} for debit cards.
+
+\end{document}

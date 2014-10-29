@@ -1,0 +1,29 @@
+Exam 2 - 5
+
+Is McDonald's cleaner than Wendy's?
+========================================================
+
+```{r, echo=FALSE}
+library(bitops)
+library(RCurl)
+library(reshape2)
+library(ggplot2)
+
+url <- paste0("https://raw.githubusercontent.com/jrwolf/","IT497/master/", "NYCHealthData.csv")
+examdt <- getURL(url)
+examdt5 <- read.csv(textConnection(examdt), sep = ",", header = T)
+
+ed5 <- examdt5
+
+ed5$DBA <- gsub(pattern = "MCDONALD([a-zA-Z0-9]|.*)|Mcdonald(.*)", replacement = "MCDONALD'S", x = ed5$DBA, ignore.case = TRUE)
+ed5$DBA <- gsub(pattern = "Wendy's Old Fashioned Hamburgers", replacement = "WENDY'S", x = ed5$DBA)
+ed5$DBA <- gsub(pattern = "WENDY'S OLD FASHIONED HAMBURGERS", replacement = "WENDY'S", x = ed5$DBA)
+
+```
+
+```{r fig.width=7, fig.height=6 , echo=FALSE}
+ggplot(ed5, aes(x = CURRENTGRADE, fill = DBA)) + geom_bar(stat = "bin", position = position_dodge())
+
+```
+
+The above graph shows that McDonald's have recieved more rating for cleanliness as compared to Wendy's. However, out of the 1000 records, we see that Wendy's have recieved just A's and B's but McDonald's have received an A, B, C, P & Z as well. Also, out of most entries for Wendy's, we see that Wendy's have recieved an A. Hence, in my view, Wendy's is more cleaner than McDonald's. 

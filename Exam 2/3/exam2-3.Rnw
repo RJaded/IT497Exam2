@@ -1,0 +1,24 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<label = local, fig=TRUE, echo = TRUE>>=
+
+local <- source("exam2-3local.R")
+local
+@
+
+This graph indicates the covered by the people to the number of miles covered.
+
+\break
+
+<<label = remote,fig = TRUE,echo = TRUE>>=
+library(devtools)
+remote <- source_url("https://dl.dropboxusercontent.com/u/44525998/exam2-3remote.R") 
+remote
+@
+
+This a mirror plot of the of the Steps vs Miles plot.
+
+\end{document}

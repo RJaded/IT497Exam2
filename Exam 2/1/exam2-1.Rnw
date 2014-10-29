@@ -1,0 +1,15 @@
+\documentclass{article}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+<<reg, echo=FALSE>>=
+
+examdata1 <- read.table("http://www.itk.ilstu.edu/faculty/jrwolf/spendingdata.txt", header = T, skip = 31, sep =",", fill = FALSE, stringsAsFactors = FALSE)
+
+@
+\textbf{Cash is the most used retail payment instrument.}
+
+In October 2012, the average American consumer had \Sexpr{round(as.numeric(examdata1[1,8]))} transactions, including purchases and bill payments, and \Sexpr{floor(as.numeric(examdata1[1,2]))} of these \Sexpr{ceiling(as.numeric(examdata1[1,8]))} payments involved cash. At \Sexpr{floor(as.numeric(examdata1[1,2])/as.numeric(examdata1[1,8]) * 100)} percent, cash makes up the single largest share of consumer transaction activity, followed by debit cards at \Sexpr{ceiling(as.numeric(examdata1[1,5])/as.numeric(examdata1[1,8]) * 100)} percent, and credit cards at \Sexpr{floor(as.numeric(examdata1[1,4])/as.numeric(examdata1[1,8]) * 100)} percent. Electronic methods (online banking bill pay and bank account number payments) account for \Sexpr{floor(as.numeric(examdata1[1,6])/as.numeric(examdata1[1,8]) * 100)} percent, while checks make up \Sexpr{ceiling(as.numeric(examdata1[1,3])/as.numeric(examdata1[1,8]) * 100)} percent. All other payments represent less than \Sexpr{ceiling((as.numeric(examdata1[1,7])/as.numeric(examdata1[1,8]) * 100) + 0.5)} percent of monthly transaction activity, with text and mobile payments barely registering at less than one half of one percent. 
+
+\end{document}

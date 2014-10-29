@@ -1,0 +1,41 @@
+Exam 2 - 4
+========================================================
+
+```{r}
+library(bitops)
+library(ggplot2)
+library(RCurl)
+library(knitr)
+
+cbbPalette <- c("#000000", "#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#0072B2", "#D55E00")
+url4 <- paste0("https://raw.githubusercontent.com/jrwolf/","IT497/master/", "databreaches.csv")
+exam4 <- getURL(url4)
+examdata4 <- read.csv(textConnection(exam4), sep = ",", header = T)
+
+examdt4 <- subset(examdata4, YEAR >= 2008)
+
+```
+
+```{r fig.width=7, fig.height=6}
+ggplot(data=examdt4, aes(x = YEAR, y = RECORDS)) + geom_bar(stat = "identity", fill="#FF9999", position = position_dodge())
+
+```
+
+The above graph indicates that since 2008, there has been a steady increase in the number of databreaches, which peaked in year 2011, but have steadlity declined by 2014. 
+```{r}
+exam4data <- examdata4
+
+exam4data$METHOD <- gsub("hacked($|[^a-zA-Z0-9])", "hacked", exam4data$METHOD, ignore.case=T)
+exam4data$METHOD <- gsub("lost / stolen media(.*)", "stolen media", exam4data$METHOD, ignore.case=T)
+
+exam4dt <- subset(exam4data, YEAR >= 2008)
+
+```
+
+```{r fig.width=7, fig.height=6, warning=FALSE}
+
+ggplot(exam4dt, aes(x = YEAR, fill = METHOD)) + geom_bar(stat = "bin", position = position_dodge()) + scale_fill_manual(values=cbbPalette)
+
+```
+
+The trend in the above graph clearly indicates that 'hacking' is the most comnmon method for databreaches to take place.
